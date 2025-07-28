@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Satwik Keshari - Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #FFB240;
+      --background: #FFFFFF;
+      --text: #010203;
+      --nav-bg: #022581;
+      --accent: #0247FE;
+      --highlight: #F28482;
+      --container-gradient: linear-gradient(135deg, #f7faff 60%, #e3f0ff 100%);
+      --container-shadow: 0 8px 36px rgba(44, 62, 80, 0.13);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: url('https://img.freepik.com/free-photo/plain-dark-blue-product-background_53876-102471.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text);
+    }
+
+    nav {
+      background-color: var(--nav-bg);
+      color: var(--background);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: var(--background);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 600;
+      transition: color 0.3s, background 0.3s, box-shadow 0.3s;
+      padding: 0.5rem 1.2rem;
+      border-radius: 24px;
+      background: var(--accent);
+      box-shadow: 0 2px 8px rgba(2,71,254,0.10);
+      position: relative;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      display: inline-block;
+    }
+
+    nav a:hover, nav a.nav-active {
+      background: var(--primary);
+      color: #12202f;
+      box-shadow: 0 4px 16px rgba(255,178,64,0.18);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 2rem 2.5rem 2rem;
+      background: rgba(18, 32, 47, 0.92); /* Deep navy with slight transparency */
+      border-radius: 32px;
+      box-shadow: 0 8px 36px rgba(0,0,0,0.25);
+      position: relative;
+      backdrop-filter: blur(2px);
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 2.5rem 0 2rem 0;
+      border-bottom: 2px solid #e3e3e3;
+      margin-bottom: 2.5rem;
+    }
+    .profile-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 16px rgba(44, 62, 80, 0.10);
+      border: 4px solid var(--accent);
+      background: #fff;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .profile-photo:hover {
+      transform: scale(1.08);
+      box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+    }
+    .profile-info {
+      flex: 1;
+    }
+    .profile-info h1, h2, h3 {
+      color: #FFB240;
+    }
+    .profile-info p, ul, li {
+      color: #e0eafc;
+    }
+
+    section {
+      margin-bottom: 3.5rem;
+      padding: 1.5rem 1.5rem 1.2rem 1.5rem;
+      background: rgba(255,255,255,0.08);
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+      transition: opacity 0.7s, transform 0.7s, box-shadow 0.3s, background 0.3s, color 0.3s;
+      opacity: 0;
+      transform: translateY(40px);
+      color: #f3f6fa;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    section:hover {
+      box-shadow: 0 8px 24px rgba(44, 62, 80, 0.13);
+      background: #1a2940;
+      color: #FFB240;
+    }
+    section:hover h1, section:hover h2, section:hover h3, section:hover ul, section:hover li, section:hover p {
+      color: #FFB240;
+    }
+
+    h1, h2, h3 {
+      color: var(--nav-bg);
+    }
+
+    .highlight {
+      color: var(--highlight);
+    }
+
+    .btn {
+      background-color: #FFB240;
+      color: #12202f;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(2, 71, 254, 0.2);
+      border-radius: 100%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s, height 0.4s, opacity 0.4s;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .btn.ripple:after {
+      width: 200px;
+      height: 200px;
+      opacity: 1;
+      transition: width 0.4s, height 0.4s, opacity 0.4s;
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(44,62,80,0.07);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: var(--nav-bg);
+      color: var(--background);
+      border-radius: 0 0 28px 28px;
+      margin-top: -1rem;
+    }
+    .interactive-email {
+      color: #FFB240;
+      font-weight: 600;
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .interactive-email:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    .photo-modal-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(30, 41, 59, 0.45);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s;
+    }
+    .photo-modal {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 90vw;
+      max-height: 90vh;
+      position: relative;
+      animation: modalIn 0.3s;
+    }
+    @keyframes modalIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .photo-modal img {
+      width: 340px;
+      height: 340px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+      border: 6px solid var(--accent);
+      background: #fff;
+      margin-bottom: 1.5rem;
+      max-width: 80vw;
+      max-height: 60vh;
+    }
+    .close-modal-btn {
+      background: #FFB240;
+      color: #12202f;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 2rem;
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(44,62,80,0.10);
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    .close-modal-btn:hover {
+      background: #0247FE;
+      color: #fff;
+    }
+    @media (max-width: 700px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.7rem 0.5rem 0.7rem 0.5rem;
+      }
+      nav > div:first-child {
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+      }
+      nav > div:last-child {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        width: 100%;
+        justify-content: flex-start;
+      }
+      nav a {
+        margin-left: 0;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 1.05rem;
+        padding: 0.7rem 1.2rem;
+        min-width: 110px;
+        text-align: center;
+      }
+      .container {
+        max-width: 98vw;
+        padding: 0.5rem 0.5rem 2rem 0.5rem;
+        border-radius: 18px;
+      }
+      .profile {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.2rem 0 1rem 0;
+        margin-bottom: 1.2rem;
+      }
+      .profile-photo {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 0.5rem;
+      }
+      .profile-info h1 {
+        font-size: 1.3rem;
+      }
+      .profile-info p {
+        font-size: 1rem;
+      }
+      section {
+        padding: 0.7rem 0.3rem 0.7rem 0.3rem;
+        margin-bottom: 1.2rem;
+        border-radius: 12px;
+        font-size: 1rem;
+        word-break: break-word;
+      }
+      section h1, section h2, section h3 {
+        font-size: 1.1rem;
+      }
+      ul, li {
+        font-size: 1rem;
+      }
+      .btn {
+        font-size: 1rem;
+        padding: 0.6rem 1.1rem;
+        border-radius: 7px;
+      }
+      .photo-modal img {
+        width: 90vw;
+        height: auto;
+        max-width: 90vw;
+        max-height: 60vh;
+      }
+      .photo-modal {
+        padding: 0.7rem;
+        max-width: 98vw;
+      }
+      footer {
+        font-size: 0.95rem;
+        border-radius: 0 0 14px 14px;
+        padding: 0.7rem;
+      }
+    }
+  </style>
+  <script>
+    // Section reveal on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('section');
+      const reveal = () => {
+        sections.forEach(sec => {
+          const rect = sec.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 60) {
+            sec.classList.add('visible');
+          }
+        });
+      };
+      window.addEventListener('scroll', reveal);
+      reveal();
+
+      // Nav highlight
+      const navLinks = document.querySelectorAll('nav a');
+      const sectionIds = Array.from(navLinks).map(a => a.getAttribute('href').replace('#',''));
+      window.addEventListener('scroll', () => {
+        let current = sectionIds[0];
+        sections.forEach(sec => {
+          const rect = sec.getBoundingClientRect();
+          if (rect.top < window.innerHeight/2) current = sec.id;
+        });
+        navLinks.forEach(a => {
+          a.classList.toggle('nav-active', a.getAttribute('href') === '#' + current);
+        });
+      });
+
+      // Enhanced highlight feature: highlight card when navigated to (scroll or nav click)
+      let lastHighlighted = null;
+      function highlightSection(section) {
+        if (lastHighlighted) lastHighlighted.classList.remove('section-highlight');
+        section.classList.add('section-highlight');
+        lastHighlighted = section;
+        setTimeout(function() {
+          section.classList.remove('section-highlight');
+          if (lastHighlighted === section) lastHighlighted = null;
+        }, 1200);
+      }
+
+      // Smooth scroll for nav links + highlight section(s)
+      document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', function(e) {
+          const href = link.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            e.preventDefault();
+            // Experience button: highlight two sections
+            if (link.id === 'nav-experience') {
+              const expSection = document.querySelector('#professional-experience');
+              const salesSection = document.querySelector('#sales-outreach');
+              if (expSection) {
+                window.scrollTo({
+                  top: expSection.offsetTop - 80,
+                  behavior: 'smooth'
+                });
+                setTimeout(function() { highlightSection(expSection); }, 500);
+              }
+              if (salesSection) {
+                setTimeout(function() { highlightSection(salesSection); }, 500);
+              }
+              return;
+            }
+            // Projects button: highlight Projects & Initiatives
+            if (link.id === 'nav-projects') {
+              const projSection = document.querySelector('#projects-initiatives');
+              if (projSection) {
+                window.scrollTo({
+                  top: projSection.offsetTop - 80,
+                  behavior: 'smooth'
+                });
+                setTimeout(function() { highlightSection(projSection); }, 500);
+              }
+              return;
+            }
+            // Why Me button: highlight Why Me section
+            if (link.id === 'nav-whyme') {
+              const whyMeSection = document.querySelector('#why-me');
+              if (whyMeSection) {
+                window.scrollTo({
+                  top: whyMeSection.offsetTop - 80,
+                  behavior: 'smooth'
+                });
+                setTimeout(function() { highlightSection(whyMeSection); }, 500);
+              }
+              return;
+            }
+            // Default: highlight single section
+            const target = document.querySelector(href);
+            if (target) {
+              window.scrollTo({
+                top: target.offsetTop - 80,
+                behavior: 'smooth'
+              });
+              setTimeout(function() { highlightSection(target); }, 500);
+            }
+          }
+        });
+      });
+
+      // Highlight card on scroll to section
+      window.addEventListener('scroll', function() {
+        const navLinks = document.querySelectorAll('nav a');
+        let currentSection = null;
+        document.querySelectorAll('section').forEach(sec => {
+          const rect = sec.getBoundingClientRect();
+          if (rect.top < window.innerHeight/2 && rect.bottom > 80) {
+            currentSection = sec;
+          }
+        });
+        if (currentSection) {
+          highlightSection(currentSection);
+        }
+      });
+
+      // Expandable experience/project items
+      document.querySelectorAll('.expandable').forEach(item => {
+        item.addEventListener('click', function() {
+          this.classList.toggle('expanded');
+        });
+      });
+
+      // Ripple effect for buttons
+      document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          btn.classList.remove('ripple');
+          void btn.offsetWidth;
+          btn.classList.add('ripple');
+          setTimeout(() => btn.classList.remove('ripple'), 400);
+        });
+      });
+
+      // Copy email
+      const copyBtn = document.getElementById('copy-email');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', function() {
+          const email = document.getElementById('main-email').textContent;
+          navigator.clipboard.writeText(email);
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => copyBtn.textContent = 'Copy Email', 1200);
+        });
+      }
+
+      // Photo modal feature
+      const profilePhoto = document.querySelector('.profile-photo');
+      if (profilePhoto) {
+        profilePhoto.addEventListener('click', function() {
+          if (document.querySelector('.photo-modal-bg')) return;
+          const modalBg = document.createElement('div');
+          modalBg.className = 'photo-modal-bg';
+          modalBg.innerHTML = `
+            <div class="photo-modal">
+              <img src="${profilePhoto.src}" alt="Satwik Keshari Large Photo" />
+              <button class="close-modal-btn">Return</button>
+            </div>
+          `;
+          document.body.appendChild(modalBg);
+          document.body.style.overflow = 'hidden';
+          modalBg.querySelector('.close-modal-btn').onclick = function() {
+            modalBg.remove();
+            document.body.style.overflow = '';
+          };
+          modalBg.onclick = function(e) {
+            if (e.target === modalBg) {
+              modalBg.remove();
+              document.body.style.overflow = '';
+            }
+          };
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <nav>
+    <div><strong>Satwik Keshari</strong></div>
+    <div>
+      <a href="#about">About</a>
+      <a href="#professional-experience" id="nav-experience">Experience</a>
+      <a href="#projects-initiatives" id="nav-projects">Projects</a>
+      <a href="#why-me" id="nav-whyme">Why Me?</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="profile">
+      <img src="https://media.licdn.com/dms/image/v2/D4D03AQFoC4GMKwWeiQ/profile-displayphoto-shrink_400_400/B4DZXEe_zyG4Ak-/0/1742758215887?e=1756339200&v=beta&t=B0DQKfd2ZKuet8ac6UfJq9K00w830GEgT2yrldQ0xV0" alt="Satwik Keshari Photo" class="profile-photo" />
+      <div class="profile-info">
+        <h1>Satwik Keshari <span>👨‍💼</span></h1>
+        <p>BBA (Digital Business & Entrepreneurship) student at <strong>IIM Bangalore</strong> <span>🎓</span></p>
+      </div>
+    </div>
+
+    <section id="about">
+      <h1>About Me <span>🧑‍💻🎯</span></h1>
+      <p>Proactive and driven BBA (Digital Business & Entrepreneurship) student at <strong>IIM Bangalore</strong> <span>🎓</span> with hands-on experience in sales, business operations, and high-stakes outreach. I'm passionate about partnerships, business growth, and outreach, and I love to build things from the ground up—whether it’s a sales pipeline or an event story. My goal is to contribute to the Partnership Cell by leveraging strong communication skills, grassroots sales experience, and a growth-oriented mindset. <span>🚀</span></p>
+    </section>
+
+    <section id="education">
+      <h2>Education <span>🎓</span></h2>
+      <ul>
+        <li><strong>Indian Institute of Management Bangalore</strong> – BBA in Digital Business & Entrepreneurship (2024 – Present)</li>
+        <li>Part of the founding cohort of IIMB’s flagship undergraduate program</li>
+        <li>Created thought leadership content on LinkedIn covering Nova Unplugged 2025</li>
+      </ul>
+    </section>
+
+    <section id="professional-experience">
+      <h2>Professional Experience <span>💼</span></h2>
+      <ul>
+        <li><strong>Vindhyawasani Traders</strong> – Business Operations Associate (Nov 2021 – Aug 2023 | Mirzapur, UP)
+          <ul>
+            <li>Managed sales, billing, and inventory operations for a family-run business</li>
+            <li>Used Tally ERP 9 for accurate financial reporting and account management</li>
+            <li>Took full ownership of supplier and client coordination in day-to-day activities</li>
+          </ul>
+        </li>
+        <li><strong>Cashier & Sales Assistant</strong> – Independent Role (2019 – 2020 | Mirzapur, UP)
+          <ul>
+            <li>Handled daily cash transactions and customer interactions in a retail setting</li>
+            <li>Strengthened interpersonal and basic accounting skills through consistent on-ground engagement</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section id="sales-outreach">
+      <h2>Sales & Outreach Experience <span>📈</span></h2>
+      <ul>
+        <li><strong>Sales Volunteer – SaaS Product Outreach (2024)</strong>
+          <ul>
+            <li>Cold-called and networked with 150+ high-level political stakeholders including MLAs, MLCs, and District Heads</li>
+            <li>Secured three product demo calls, including:<br>
+              ✅ 1 MLC – Maharashtra Legislative Council<br>
+              ✅ 2 District Presidents – Haryana and West Bengal BJP (Yamunanagar & Kashipur)
+            </li>
+            <li>Crafted personalized pitch scripts and follow-ups to drive interest in civic tech innovation</li>
+            <li>Demonstrated ability to connect with decision-makers and maintain professional communication pipelines</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section id="projects-initiatives">
+      <h2>Projects & Initiatives <span>🧠</span></h2>
+      <ul>
+        <li><strong>Nova Unplugged 2025 – IIMB DBE Immersion Event</strong> – Content Creator & Analyst
+          <ul>
+            <li>Authored a 11-post LinkedIn series documenting insights from sessions with top industry leaders</li>
+            <li>Featured speakers included Prof. Rishikesha Krishnan, Vibhanshu Golia (McKinsey), Manjyoti Parashar (content creator), and more</li>
+            <li>Demonstrated event awareness, documentation, and public storytelling</li>
+          </ul>
+        </li>
+        <li><strong>Leafy Affairs Social Media Marketing Project</strong> – Team Lead & Strategist
+          <ul>
+            <li>Initiated collaboration with Supriya Donthi, owner of Leafy Affairs, for a social media marketing project</li>
+            <li>Currently in advanced talks to manage Leafy Affairs' social media presence and campaigns with my team</li>
+            <li>Responsible for strategy, content planning, and execution to boost brand engagement</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section id="skills">
+      <h2>Key Skills <span>🤝</span></h2>
+      <ul>
+        <li>Cold Calling & Sales Communication</li>
+        <li>Stakeholder Engagement & CRM</li>
+        <li>Strategic Content Creation</li>
+        <li>B2B/B2C Outreach</li>
+        <li>Tally ERP 9 & Business Accounting</li>
+        <li>Event Coverage & Writing</li>
+      </ul>
+    </section>
+
+    <section id="achievements">
+      <h2>Achievements <span>🏆</span></h2>
+      <ul>
+        <li>Successfully initiated contact with over 150 public officials through cold outreach</li>
+        <li>Selected to attend and cover Nova Unplugged 2025 as a content contributor</li>
+        <li>Delivered high-quality LinkedIn content series, building visibility for IIMB DBE</li>
+        <li><strong>Organized the Budget Controversy Event (N Zone Two) – Event Head</strong>
+          <ul>
+            <li>Led the planning and execution of the Budget Controversy event as Event Head for N Zone Two</li>
+            <li>Personally contacted and invited two external judges, both experts in their fields and not affiliated with IIMB</li>
+            <li>Judge 1: Youth Parliament runner-up, awarded by Om Birla (Speaker of Rajya Sabha & Lok Sabha)</li>
+            <li>Judge 2: Multiple MUN winner, recognized for excellence in Model United Nations competitions</li>
+            <li>Demonstrated leadership, outreach, and event management skills in a high-stakes setting</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section id="extra-curriculars">
+      <h2>Extra-Curriculars <span>🎤</span></h2>
+      <ul>
+        <li>Speech & Voice Delivery: Practicing structured speech, tonal modulation, and filler reduction</li>
+        <li>Sports: Basketball and taeqwando player</li>
+        <li>Dance: Intermediate-level performer</li>
+        <li>Music: Self-taught guitarist and pianist</li>
+        <li>Rubik’s Cube: Solver of multiple types, enhancing pattern thinking</li>
+        <li>Fitness: Regular strength training and bulking through a custom eggitarian diet</li>
+      </ul>
+    </section>
+
+    <section id="why-me">
+      <h2>Why Me for the Partnership Cell? <span>📌</span></h2>
+      <ul>
+        <li>✅ Proven ability to initiate and nurture high-level connections, including public officials and industry leaders</li>
+        <li>✅ Led impactful events and projects, demonstrating strong leadership, outreach, and organizational skills</li>
+        <li>✅ Experience in strategic communication, content creation, and brand representation across multiple platforms</li>
+        <li>✅ Entrepreneurial mindset with hands-on sales, business operations, and partnership experience</li>
+        <li>✅ Track record of building visibility for new initiatives and driving engagement through innovative approaches</li>
+        <li>✅ Committed to the growth and vision of the DBE program, ready to represent and expand its network</li>
+        <li>✅ Personal aim to fully leverage the DBE degree by using the Partnership Cell as a professional pathway to connect with industry leaders, utilizing IIMB's support to maximize opportunities and impact</li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>Contact <span>📬</span></h2>
+      <p>Email: <a href="mailto:satwikkeshari15@gmail.com" class="interactive-email">✉️ satwikkeshari15@gmail.com</a>, <a href="mailto:satwikk24@iimb.ac.in" class="interactive-email">✉️ satwikk24@iimb.ac.in</a></p>
+      <p>Phone: <span>📞</span> 8176853340</p>
+      <p>Location: <span>📍</span> Mirzapur, Uttar Pradesh</p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/satwik-keshari-983511338" class="interactive-email" target="_blank">🔗 Linkedin</a></p>
+      <p>Instagram: <a href="https://www.instagram.com/moralis_leo_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="interactive-email" target="_blank">📸 Instagram</a></p>
+    </section>
+  </div>
+
+  <footer>
+    <p>Made by Satwik Keshari © 2025</p>
+  </footer>
+</body>
+</html>
