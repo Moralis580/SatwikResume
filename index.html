@@ -585,7 +585,120 @@
         <a href="#contact">Contact</a>
       </div>
     </nav>
-
+    <!-- Mobile Nav Popup Trigger & Menu -->
+    <div id="mobile-nav-trigger" style="display:none; position:fixed; top:18px; right:18px; z-index:1100;">
+      <button aria-label="Open Menu" style="background:var(--primary-dark); color:var(--background); border:none; border-radius:50%; width:44px; height:44px; font-size:1.7rem; box-shadow:0 2px 8px rgba(54,116,181,0.13); cursor:pointer;">
+        ☰
+      </button>
+    </div>
+    <div id="mobile-nav-popup" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(54,116,181,0.13); z-index:1200;">
+      <div style="background:var(--nav-bg); color:var(--accent); border-radius:18px; box-shadow:0 8px 36px rgba(54,116,181,0.13); position:absolute; top:54px; right:18px; min-width:220px; padding:1.2rem 1rem; display:flex; flex-direction:column; gap:1rem;">
+        <button id="close-mobile-nav" aria-label="Close Menu" style="align-self:flex-end; background:var(--primary-dark); color:var(--background); border:none; border-radius:50%; width:36px; height:36px; font-size:1.3rem; cursor:pointer;">×</button>
+        <a href="#about">About</a>
+        <a href="#professional-experience" id="nav-experience-mobile">Experience</a>
+        <a href="#projects-initiatives" id="nav-projects-mobile">Projects</a>
+        <a href="#skills" id="nav-skills-mobile">Skills</a>
+        <a href="#why-me" id="nav-whyme-mobile">Why Me?</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <script>
+      function isMobile() {
+        return window.innerWidth <= 700;
+      }
+      function showMobileNav(show) {
+        document.getElementById("mobile-nav-popup").style.display = show ? "block" : "none";
+        document.body.style.overflow = show ? "hidden" : "";
+      }
+      function updateNavDisplay() {
+        const nav = document.querySelector("nav");
+        const trigger = document.getElementById("mobile-nav-trigger");
+        if (isMobile()) {
+          nav.style.display = "none";
+          trigger.style.display = "block";
+        } else {
+          nav.style.display = "flex";
+          trigger.style.display = "none";
+          showMobileNav(false);
+        }
+      }
+      window.addEventListener("resize", updateNavDisplay);
+      document.addEventListener("DOMContentLoaded", function () {
+        updateNavDisplay();
+        document.getElementById("mobile-nav-trigger").onclick = function () {
+          showMobileNav(true);
+        };
+        document.getElementById("close-mobile-nav").onclick = function () {
+          showMobileNav(false);
+        };
+        document.getElementById("mobile-nav-popup").onclick = function (e) {
+          if (e.target === this) showMobileNav(false);
+        };
+        document.querySelectorAll("#mobile-nav-popup a").forEach(function (link) {
+          link.onclick = function (e) {
+            showMobileNav(false);
+            // mimic nav link scroll/highlight logic
+            const href = link.getAttribute("href");
+            if (href && href.startsWith("#")) {
+              e.preventDefault();
+              const target = document.querySelector(href);
+              if (target) {
+                window.scrollTo({ top: target.offsetTop - 80, behavior: "smooth" });
+                setTimeout(function () {
+                  if (window.highlightSection) highlightSection(target);
+                }, 500);
+              }
+            }
+          };
+        });
+        // Experience/Projects/WhyMe buttons mimic desktop nav logic
+        document.getElementById("nav-experience-mobile").onclick = function (e) {
+          showMobileNav(false);
+          e.preventDefault();
+          const expSection = document.querySelector("#professional-experience");
+          const salesSection = document.querySelector("#sales-outreach");
+          if (expSection) {
+            window.scrollTo({ top: expSection.offsetTop - 80, behavior: "smooth" });
+            setTimeout(function () {
+              if (window.highlightSection) highlightSection(expSection);
+            }, 500);
+          }
+          if (salesSection) {
+            setTimeout(function () {
+              if (window.highlightSection) highlightSection(salesSection);
+            }, 500);
+          }
+        };
+        document.getElementById("nav-projects-mobile").onclick = function (e) {
+          showMobileNav(false);
+          e.preventDefault();
+          const projSection = document.querySelector("#projects-initiatives");
+          if (projSection) {
+            window.scrollTo({ top: projSection.offsetTop - 80, behavior: "smooth" });
+            setTimeout(function () {
+              if (window.highlightSection) highlightSection(projSection);
+            }, 500);
+          }
+        };
+        document.getElementById("nav-whyme-mobile").onclick = function (e) {
+          showMobileNav(false);
+          e.preventDefault();
+          const whyMeSection = document.querySelector("#why-me");
+          if (whyMeSection) {
+            window.scrollTo({ top: whyMeSection.offsetTop - 80, behavior: "smooth" });
+            setTimeout(function () {
+              if (window.highlightSection) highlightSection(whyMeSection);
+            }, 500);
+          }
+        };
+      });
+    </script>
+    <style>
+      @media (max-width: 700px) {
+        #mobile-nav-trigger { display:block !important; }
+        #mobile-nav-popup { display:none; }
+      }
+    </style>
     <div class="container">
       <div class="profile">
         <img
@@ -673,7 +786,8 @@
             <ul>
               <li>
                 Cold-called and networked with 150+ high-level political
-                stakeholders including <strong>MLAs, MLCs, and District Heads</strong>
+                stakeholders including
+                <strong>MLAs, MLCs, and District Heads</strong>
               </li>
               <li>
                 Secured three product demo calls, including:<br />
@@ -682,8 +796,9 @@
                 (Yamunanagar & Kashipur)
               </li>
               <li>
-                Crafted <strong>personalized pitch scripts and follow-ups</strong> to drive
-                interest in civic tech innovation
+                Crafted
+                <strong>personalized pitch scripts and follow-ups</strong> to
+                drive interest in civic tech innovation
               </li>
               <li>
                 Demonstrated ability to connect with decision-makers and
